@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>unauthorized access</title>
+<style>
+  :root{
+    --bg:#12121c;
+    --red:#ff5a3c;
+    --text:#f2f2f5;
+    --muted:#8a8aa3;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:"Inter","Segoe UI",system-ui,-apple-system,sans-serif;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    overflow:hidden;
+  }
+
+  .stage{
+    text-align:center;
+    max-width:760px;
+    padding:0 24px;
+    user-select:none;
+  }
+
+  .banner{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    font-weight:700;
+    font-size:15px;
+    letter-spacing:.01em;
+    margin-bottom:22px;
+  }
+  .dot{
+    width:16px;height:16px;border-radius:50%;
+    background:var(--red);
+    box-shadow:0 0 0 6px rgba(255,90,60,.12);
+  }
+
+  h1{
+    font-size:clamp(22px,3.4vw,34px);
+    font-weight:800;
+    letter-spacing:-.01em;
+    margin:0 0 14px;
+    line-height:1.25;
+  }
+
+  .sub{
+    color:var(--muted);
+    font-size:15px;
+    margin-bottom:40px;
+  }
+
+  .loader-label{
+    font-size:12px;
+    color:var(--muted);
+    text-transform:uppercase;
+    letter-spacing:.12em;
+    margin-bottom:10px;
+  }
+
+  .loadstring-wrap{
+    position:relative;
+    background:#1a1a28;
+    border:1px solid #26263a;
+    border-radius:10px;
+    padding:14px 16px;
+    text-align:left;
+    overflow:hidden;
+  }
+
+  .loadstring-box{
+    font-family:"JetBrains Mono","Fira Code",Consolas,monospace;
+    font-size:13px;
+    color:#d7d7e6;
+    white-space:pre-wrap;
+    word-break:break-all;
+    padding-right:96px;
+    line-height:1.55;
+  }
+  .loadstring-box .kw{color:var(--red)}
+
+  #copy-btn{
+    position:absolute;
+    top:10px;
+    right:10px;
+    background:#232336;
+    color:var(--muted);
+    border:1px solid #33334d;
+    border-radius:6px;
+    padding:6px 10px;
+    font-size:11px;
+    font-family:inherit;
+    font-weight:600;
+    cursor:pointer;
+    transition:color .15s,border-color .15s,background .15s;
+    z-index:2;
+  }
+  #copy-btn:hover{color:var(--text);border-color:#4d4d66;background:#2a2a42}
+  #copy-btn.copied{color:var(--red);border-color:var(--red);background:#2a1a1a}
+
+</style>
+</head>
+<body>
+
+  <main class="stage">
+    <div class="banner">
+      <span class="dot"></span>
+      <span>unauthorized acces</span>
+      <span class="dot"></span>
+    </div>
+
+    <h1>you are not allowed to get the source neegy</h1>
+    <p class="sub">close this page or i kil-</p>
+
+    <div class="loader-wrap">
+      <div class="loader-label">here is script neegy:</div>
+      <div class="loadstring-wrap">
+        <button id="copy-btn" type="button">copy</button>
+        <div class="loadstring-box" id="loader-code"><span class="kw">local</span> t=game:HttpGet("https://YOUR-APP.up.railway.app/mint")loadstring(game:HttpGet("https://YOUR-APP.up.railway.app/loader.lua?t="..t))()</div>
+      </div>
+    </div>
+  </main>
+
+<script>
+  const btn = document.getElementById('copy-btn');
+  const code = document.getElementById('loader-code');
+
+  btn.addEventListener('click', async (e) => {
+    e.stopPropagation();
+    const text = code.innerText.trim();
+    try {
+      await navigator.clipboard.writeText(text);
+      flash();
+    } catch (err) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      try { document.execCommand('copy'); } catch (_) {}
+      document.body.removeChild(ta);
+      flash();
+    }
+  });
+
+  function flash(){
+    btn.textContent = 'copied';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'copy';
+      btn.classList.remove('copied');
+    }, 1600);
+  }
+</script>
+</body>
+</html>
